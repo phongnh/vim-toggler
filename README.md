@@ -21,17 +21,17 @@ Use [vim + pathogen](http://vimcasts.org/episodes/synchronizing-plugins-with-git
 
 Use vim plugin manager
 
-  " https://github.com/VundleVim/Vundle.vim
-  Plugin 'phongnh/toggler.vim'
-  :PluginInstall
+    " https://github.com/VundleVim/Vundle.vim
+    Plugin 'phongnh/toggler.vim'
+    :PluginInstall
 
-  " https://github.com/junegunn/vim-plug
-  Plug 'phongnh/toggler.vim'
-  :PlugInstall
+    " https://github.com/junegunn/vim-plug
+    Plug 'phongnh/toggler.vim'
+    :PlugInstall
 
-  " https://github.com/Shougo/neobundle.vim
-  NeoBundle 'phongnh/toggler.vim'
-  :NeoBundleInstall
+    " https://github.com/Shougo/neobundle.vim
+    NeoBundle 'phongnh/toggler.vim'
+    :NeoBundleInstall
 
 ## License
 
