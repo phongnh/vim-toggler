@@ -11,7 +11,8 @@ function! s:ToggleEOL()
     endif
 endfunction
 
-nnoremap <silent> coe :call <SID>ToggleEOL()<CR>
+nnoremap <silent> <Plug>ToggleEOL :call <SID>ToggleEOL()<CR>
+nmap coe <Plug>ToggleEOL
 " }}}
 
 " Toggle conceallevel {{{
@@ -26,7 +27,8 @@ if has('conceal')
         echo "conceallevel = " . &conceallevel
     endfunction
 
-    nnoremap <silent> coa :call <SID>ToggleConceallevel()<CR>
+    nnoremap <silent> <Plug>ToggleConceallevel :call <SID>ToggleConceallevel()<CR>
+    nmap coa <Plug>ToggleConceallevel
 endif
 " }}}
 
@@ -63,22 +65,24 @@ function! s:ToggleGJK()
     endif
 endfunction
 
-nnoremap <silent> com :call <SID>ToggleGJK()<CR>
+nnoremap <silent> <Plug>ToggleGJK :call <SID>ToggleGJK()<CR>
+nmap com <Plug>ToggleGJK
 " }}}
 
 " Toggle Mouse {{{
 if has('mouse')
     function! s:ToggleMouse()
         if &mouse == ""
-            set mouse="a"
+            set mouse=a
             echo 'Mouse is for Vim (' . &mouse . ')'
         else
-            set mouse=""
+            set mouse=
             echo 'Mouse is for terminal'
         endif
     endfunction
 
-    nnoremap <silent> coM :call <SID>ToggleMouse()<CR>
+    nnoremap <silent> <Plug>ToggleMouse :call <SID>ToggleMouse()<CR>
+    nmap coM <Plug>ToggleMouse
 endif
 " }}}
 
