@@ -11,7 +11,7 @@ function! s:ToggleEOL()
     endif
 endfunction
 
-nnoremap <silent> coe :call s:ToggleEOL()<CR>
+nnoremap <silent> coe :call <SID>ToggleEOL()<CR>
 " }}}
 
 " Toggle conceallevel {{{
@@ -26,7 +26,7 @@ if has('conceal')
         echo "conceallevel = " . &conceallevel
     endfunction
 
-    nnoremap <silent> coa :call s:ToggleConceallevel()<CR>
+    nnoremap <silent> coa :call <SID>ToggleConceallevel()<CR>
 endif
 " }}}
 
@@ -63,7 +63,7 @@ function! s:ToggleGJK()
     endif
 endfunction
 
-nnoremap <silent> com :call s:ToggleGJK()<CR>
+nnoremap <silent> com :call <SID>ToggleGJK()<CR>
 " }}}
 
 " Toggle Mouse {{{
@@ -78,7 +78,7 @@ if has('mouse')
         endif
     endfunction
 
-    nnoremap <silent> coM :call s:ToggleMouse()<CR>
+    nnoremap <silent> coM :call <SID>ToggleMouse()<CR>
 endif
 " }}}
 
