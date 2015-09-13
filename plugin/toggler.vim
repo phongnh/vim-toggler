@@ -111,7 +111,7 @@ nnoremap <silent> co8 :setlocal tabstop=8 shiftwidth=8 softtabstop=8<CR>:echo "S
 nnoremap <silent> cof :setlocal foldenable! foldenable?<CR>
 
 " Toggle "keep current line in the center of the screen" mode
-nnoremap <silent> coz :let &scrolloff = 999 - &scrolloff
+nnoremap <silent> coz :let &scrolloff = 999 - &scrolloff<CR>
     \ :echo "scrolloff = " . &scrolloff<CR>
 
 " Toggle number
