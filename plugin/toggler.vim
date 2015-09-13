@@ -86,6 +86,21 @@ if has('mouse')
 endif
 " }}}
 
+" Toggle Tabline {{{
+    function! s:ToggleTabline()
+        if &showtabline == 2
+            set showtabline=0
+            echo "Disabled tabline"
+        else
+            set showtabline=2
+            echo 'Enabled tabline'
+        endif
+    endfunction
+
+    nnoremap <silent> <Plug>ToggleTabline :call <SID>ToggleTabline()<CR>
+    nmap cot <Plug>ToggleTabline
+" }}}
+
 " Change tab width {{{
 nnoremap <silent> co2 :setlocal tabstop=2 shiftwidth=2 softtabstop=2<CR>:echo "Spaces: " . &shiftwidth<CR>
 nnoremap <silent> co4 :setlocal tabstop=4 shiftwidth=4 softtabstop=4<CR>:echo "Spaces: " . &shiftwidth<CR>
@@ -96,18 +111,22 @@ nnoremap <silent> co8 :setlocal tabstop=8 shiftwidth=8 softtabstop=8<CR>:echo "S
 nnoremap <silent> cof :setlocal foldenable! foldenable?<CR>
 
 " Toggle "keep current line in the center of the screen" mode
+nnoremap <silent> coz :let &scrolloff = 999 - &scrolloff
     \ :echo "scrolloff = " . &scrolloff<CR>
 
 " Toggle number
-" nnoremap <silent> con :setlocal number! number<CR>
+" nnoremap <silent> con :set number! number<CR>
 
 " Toggle paste
-" nnoremap <silent> cop :setlocal paste! paste?<CR>
+nnoremap <silent> cop :setlocal paste! paste?<CR>
 
 " Toggle wrap
-" nnoremap <silent> cow :setlocal wrap! wrap?<CR>
+" nnoremap <silent> cow :set wrap! wrap?<CR>
 
 " Toggle spell checking
-" nnoremap <silent> cos :setlocal spell! spell?<CR>
+" nnoremap <silent> cos :set spell! spell?<CR>
 
-let g:loaded_toggler = '0.1.0'
+" Toggle showcmd
+nnoremap <silent> coC :set showcmd! showcmd?<CR>
+
+let g:loaded_toggler = '0.2.0'
