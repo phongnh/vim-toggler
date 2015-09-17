@@ -3,7 +3,7 @@ if exists('g:loaded_toggler')
 endif
 
 " Toggle EOL {{{
-function! s:ToggleEOL()
+function! <SID>ToggleEOL()
     if match(&listchars, 'eol:¬') > -1
         set listchars-=eol:¬
     else
@@ -11,13 +11,12 @@ function! s:ToggleEOL()
     endif
 endfunction
 
-nnoremap <silent> <Plug>ToggleEOL :call <SID>ToggleEOL()<CR>
-nmap coe <Plug>ToggleEOL
+nnoremap <silent> coe :call <SID>ToggleEOL()<CR>
 " }}}
 
 " Toggle conceallevel {{{
 if has('conceal')
-    function! s:ToggleConceallevel()
+    function! <SID>ToggleConceallevel()
         if &conceallevel == 0
             set conceallevel=2
         else
@@ -27,13 +26,12 @@ if has('conceal')
         echo "conceallevel = " . &conceallevel
     endfunction
 
-    nnoremap <silent> <Plug>ToggleConceallevel :call <SID>ToggleConceallevel()<CR>
-    nmap coa <Plug>ToggleConceallevel
+    nnoremap <silent> coa :call <SID>ToggleConceallevel()<CR>
 endif
 " }}}
 
 " Exchange gj and gk to j and k {{{
-function! s:ToggleGJK()
+function! <SID>ToggleGJK()
     if exists('b:enabled_gjk') && b:enabled_gjk
         let b:enabled_gjk = 0
 
@@ -65,13 +63,12 @@ function! s:ToggleGJK()
     endif
 endfunction
 
-nnoremap <silent> <Plug>ToggleGJK :call <SID>ToggleGJK()<CR>
-nmap com <Plug>ToggleGJK
+nnoremap <silent> com :call <SID>ToggleGJK()<CR>
 " }}}
 
-" Toggle Mouse {{{
+" Toggle mouse {{{
 if has('mouse')
-    function! s:ToggleMouse()
+    function! <SID>ToggleMouse()
         if &mouse == ""
             set mouse=a
             echo 'Mouse is for Vim (' . &mouse . ')'
@@ -81,24 +78,22 @@ if has('mouse')
         endif
     endfunction
 
-    nnoremap <silent> <Plug>ToggleMouse :call <SID>ToggleMouse()<CR>
-    nmap coM <Plug>ToggleMouse
+    nnoremap <silent> coM :call <SID>ToggleMouse()<CR>
 endif
 " }}}
 
 " Toggle Tabline {{{
-    function! s:ToggleTabline()
-        if &showtabline == 2
-            set showtabline=0
-            echo "Disabled tabline"
-        else
-            set showtabline=2
-            echo 'Enabled tabline'
-        endif
-    endfunction
+function! <SID>ToggleTabline()
+    if &showtabline == 2
+        set showtabline=0
+        echo "Disabled tabline"
+    else
+        set showtabline=2
+        echo 'Enabled tabline'
+    endif
+endfunction
 
-    nnoremap <silent> <Plug>ToggleTabline :call <SID>ToggleTabline()<CR>
-    nmap cot <Plug>ToggleTabline
+nnoremap <silent> cot :call <SID>ToggleTabline()<CR>
 " }}}
 
 " Change tab width {{{
