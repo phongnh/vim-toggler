@@ -82,6 +82,22 @@ if has('mouse')
 endif
 " }}}
 
+" Toggle clipboard {{{
+if has('clipboard')
+    function! <SID>ToggleClipboard()
+        if match(&clipboard, 'unnamed') > -1
+            set clipboard-=unnamed
+            echo 'Disabled "unnamed" clipboard!'
+        else
+            set clipboard+=unnamed
+            echo 'Enabled "unnamed" clipboard!'
+        endif
+    endfunction
+
+    nnoremap <silent> coy :call <SID>ToggleClipboard()<CR>
+endif
+" }}}
+
 " Toggle Tabline {{{
 function! <SID>ToggleTabline()
     if &showtabline == 2
@@ -137,4 +153,4 @@ nnoremap <silent> cop :call <SID>ToggleLocalOption('paste')<CR>
 " Toggle showcmd
 nnoremap <silent> coC :call <SID>ToggleOption('showcmd')<CR>
 
-let g:loaded_toggler = '0.2.0'
+let g:loaded_toggler = '0.3.0'
