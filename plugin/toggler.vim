@@ -150,6 +150,9 @@ nnoremap <silent> cop :call <SID>ToggleLocalOption('paste')<CR>
 " Toggle spell checking
 " nnoremap <silent> cos :call <SID>ToggleOption('spell')<CR>
 
+" Toggle showmode
+nnoremap <silent> coo :call <SID>ToggleOption('showmode')<CR>
+
 " Toggle showcmd
 nnoremap <silent> coC :call <SID>ToggleOption('showcmd')<CR>
 
