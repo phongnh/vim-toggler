@@ -11,6 +11,7 @@ Toggle useful options:
 * gj and j, gk and k
 * folding
 * scrolloff
+* "unnamed" clipboard
 
 ## Installation
 
