@@ -85,12 +85,22 @@ endif
 " Toggle clipboard {{{
 if has('clipboard')
     function! <SID>ToggleClipboard()
-        if match(&clipboard, 'unnamed') > -1
-            set clipboard-=unnamed
-            echo 'Disabled "unnamed" clipboard!'
+        if has('unnamedplus')
+            if match(&clipboard, 'unnamedplus') > -1
+                set clipboard-=unamedplus
+                echo 'Disabled "unnamedplus" clipboard!'
+            else
+                set clipboard+=unnamedplus
+                echo 'Enabled "unnamedplus" clipboard!'
+            endif
         else
-            set clipboard+=unnamed
-            echo 'Enabled "unnamed" clipboard!'
+            if match(&clipboard, 'unnamed') > -1
+                set clipboard-=unnamed
+                echo 'Disabled "unnamed" clipboard!'
+            else
+                set clipboard+=unnamed
+                echo 'Enabled "unnamed" clipboard!'
+            endif
         endif
     endfunction
 
