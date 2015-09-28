@@ -112,10 +112,10 @@ endif
 function! <SID>ToggleTabline()
     if &showtabline == 2
         set showtabline=0
-        echo "Disabled tabline"
+        echo 'Disabled tabline!'
     else
         set showtabline=2
-        echo 'Enabled tabline'
+        echo 'Enabled tabline!'
     endif
 endfunction
 
