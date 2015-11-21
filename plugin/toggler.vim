@@ -122,6 +122,20 @@ endfunction
 nnoremap <silent> cot :call <SID>ToggleTabline()<CR>
 " }}}
 
+" Toggle statusline {{{
+function! <SID>ToggleStatusline()
+    if &laststatus == 2
+        set laststatus=0
+        echo 'Disabled statusline!'
+    else
+        set laststatus=2
+        echo 'Enabled statusline!'
+    endif
+endfunction
+
+nnoremap <silent> coS :call <SID>ToggleStatusline()<CR>
+" }}}
+
 " Toggle option {{{
 function! <SID>ToggleOption(option_name)
     execute 'set' a:option_name.'!'
@@ -140,6 +154,10 @@ endfunction
 nnoremap <silent> co2 :setlocal tabstop=2 shiftwidth=2 softtabstop=2<CR>:echo "Spaces: " . &shiftwidth<CR>
 nnoremap <silent> co4 :setlocal tabstop=4 shiftwidth=4 softtabstop=4<CR>:echo "Spaces: " . &shiftwidth<CR>
 nnoremap <silent> co8 :setlocal tabstop=8 shiftwidth=8 softtabstop=8<CR>:echo "Spaces: " . &shiftwidth<CR>
+
+nnoremap co@ :setlocal tabstop=2<CR>
+nnoremap co$ :setlocal tabstop=4<CR>
+nnoremap co* :setlocal tabstop=8<CR>
 " }}}
 
 " Toggle folding
@@ -166,4 +184,4 @@ nnoremap <silent> coo :call <SID>ToggleOption('showmode')<CR>
 " Toggle showcmd
 nnoremap <silent> coC :call <SID>ToggleOption('showcmd')<CR>
 
-let g:loaded_toggler = '0.3.0'
+let g:loaded_toggler = '0.4.0'
