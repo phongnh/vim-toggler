@@ -12,6 +12,7 @@ Toggle useful options:
 * folding
 * scrolloff
 * "unnamed" clipboard
+* laststatus
 
 ## Installation
 
