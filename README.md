@@ -5,6 +5,7 @@ Toggle useful options:
 * showtabline
 * showmode
 * showcmd
+* cursorline
 * mouse
 * eol of listchars
 * conceallevel
@@ -13,6 +14,8 @@ Toggle useful options:
 * scrolloff
 * "unnamed" clipboard
 * laststatus
+* quickfix
+* location list
 
 ## Installation
 

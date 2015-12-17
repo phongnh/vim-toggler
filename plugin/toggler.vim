@@ -133,7 +133,7 @@ function! <SID>ToggleStatusline()
     endif
 endfunction
 
-nnoremap <silent> coS :call <SID>ToggleStatusline()<CR>
+nnoremap <silent> coT :call <SID>ToggleStatusline()<CR>
 " }}}
 
 " Toggle option {{{
@@ -179,9 +179,48 @@ nnoremap <silent> cop :call <SID>ToggleLocalOption('paste')<CR>
 " nnoremap <silent> cos :call <SID>ToggleOption('spell')<CR>
 
 " Toggle showmode
-nnoremap <silent> coo :call <SID>ToggleOption('showmode')<CR>
+" nnoremap <silent> coo :call <SID>ToggleOption('showmode')<CR>
 
 " Toggle showcmd
-nnoremap <silent> coC :call <SID>ToggleOption('showcmd')<CR>
+" nnoremap <silent> coC :call <SID>ToggleOption('showcmd')<CR>
 
-let g:loaded_toggler = '0.4.0'
+" Toggle cursorline
+nnoremap <silent> coc :call <SID>ToggleOption('cursorline')<CR>
+
+" Toggle quickfix / location list {{{
+function! s:ToggleQuickfix()
+    if exists("s:quickfix_bufnr")
+        silent! cclose
+    else
+        silent! copen
+    endif
+endfunction
+
+function! s:ToggleLocationList()
+    if exists("s:quickfix_bufnr")
+        silent! lclose
+    else
+        silent! lopen
+    endif
+endfunction
+
+function! s:SetQuickfixBufnrOnBufWinEnter()
+    let s:quickfix_bufnr = bufnr('$')
+endfunction
+
+function! s:CheckQuickfixBufnrOnBufWinLeave()
+    if exists("s:quickfix_bufnr") && s:quickfix_bufnr == expand("<abuf>")
+        unlet s:quickfix_bufnr
+    endif
+endfunction
+
+augroup vim-toogler
+    autocmd BufWinEnter quickfix call <SID>SetQuickfixBufnrOnBufWinEnter()
+    autocmd BufWinLeave *        call <SID>CheckQuickfixBufnrOnBufWinLeave()
+augroup END
+
+nnoremap <silent> coq :call <SID>ToggleQuickfix()<CR>
+nnoremap <silent> coQ :call <SID>ToggleLocationList()<CR>
+" }}}
+
+let g:loaded_toggler = '0.5.0'
