@@ -182,10 +182,10 @@ nnoremap <silent> cop :call <SID>ToggleLocalOption('paste')<CR>
 " nnoremap <silent> coo :call <SID>ToggleOption('showmode')<CR>
 
 " Toggle showcmd
-" nnoremap <silent> coC :call <SID>ToggleOption('showcmd')<CR>
+" nnoremap <silent> co; :call <SID>ToggleOption('showcmd')<CR>
 
 " Toggle cursorline
-nnoremap <silent> coc :call <SID>ToggleOption('cursorline')<CR>
+" nnoremap <silent> coc :call <SID>ToggleOption('cursorline')<CR>
 
 " Toggle quickfix / location list {{{
 function! s:ToggleQuickfix()
@@ -223,4 +223,4 @@ nnoremap <silent> coq :call <SID>ToggleQuickfix()<CR>
 nnoremap <silent> coQ :call <SID>ToggleLocationList()<CR>
 " }}}
 
-let g:loaded_toggler = '0.5.0'
+let g:loaded_toggler = '0.6.0'
