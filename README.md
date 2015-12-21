@@ -1,4 +1,4 @@
-# toggler.vim
+# vim-toggler
 
 Toggle useful options:
 
@@ -22,20 +22,20 @@ Toggle useful options:
 Use [vim + pathogen](http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen)
 
     cd ~/.vim
-    git submodule add https://github.com/phongnh/toggler.vim bundle/toggler.vim
+    git submodule add https://github.com/phongnh/vim-toggler bundle/vim-toggler
 
 Use vim plugin manager
 
     " https://github.com/VundleVim/Vundle.vim
-    Plugin 'phongnh/toggler.vim'
+    Plugin 'phongnh/vim-toggler'
     :PluginInstall
 
     " https://github.com/junegunn/vim-plug
-    Plug 'phongnh/toggler.vim'
+    Plug 'phongnh/vim-toggler'
     :PlugInstall
 
     " https://github.com/Shougo/neobundle.vim
-    NeoBundle 'phongnh/toggler.vim'
+    NeoBundle 'phongnh/vim-toggler'
     :NeoBundleInstall
 
 ## License
