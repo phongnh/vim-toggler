@@ -21,13 +21,13 @@ Toggle useful options:
 * number (con)
 * relativenumber (cor)
 * cursorline (coc)
-* paste (coy)
 * spell (cos)
 * wrap (cow)
 * quickfix (coq)
 * location list (coQ)
 * scrolloff (coz)
 * showcmd (co;)
+* enter insert mode with paste (yo / yO) (it is copied from vim-unimpaired)
 
 ## Installation
 

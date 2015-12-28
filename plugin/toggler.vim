@@ -4,7 +4,7 @@ endif
 
 " Toggle conceallevel {{{
 if has('conceal')
-    function! <SID>ToggleConceallevel()
+    function! s:ToggleConceallevel()
         if &conceallevel == 0
             set conceallevel=2
         else
@@ -19,7 +19,7 @@ endif
 " }}}
 
 " Exchange gj and gk to j and k {{{
-function! <SID>ToggleGJK()
+function! s:ToggleGJK()
     if exists('s:enabled_gjk') && s:enabled_gjk
         let s:enabled_gjk = 0
 
@@ -56,7 +56,7 @@ nnoremap <silent> com :call <SID>ToggleGJK()<CR>
 
 " Toggle mouse {{{
 if has('mouse')
-    function! <SID>ToggleMouse()
+    function! s:ToggleMouse()
         if &mouse == ""
             set mouse=a
             echo 'Mouse is for Vim (' . &mouse . ')'
@@ -72,7 +72,7 @@ endif
 
 " Toggle clipboard {{{
 if has('clipboard')
-    function! <SID>ToggleClipboard()
+    function! s:ToggleClipboard()
         if has('unnamedplus')
             if match(&clipboard, 'unnamedplus') > -1
                 set clipboard-=unamedplus
@@ -97,7 +97,7 @@ endif
 " }}}
 
 " Toggle Tabline {{{
-function! <SID>ToggleTabline()
+function! s:ToggleTabline()
     if &showtabline == 2
         set showtabline=0
         echo 'Disabled tabline!'
@@ -111,7 +111,7 @@ nnoremap <silent> cot :call <SID>ToggleTabline()<CR>
 " }}}
 
 " Toggle statusline {{{
-function! <SID>ToggleStatusline()
+function! s:ToggleStatusline()
     if &laststatus == 2
         set laststatus=0
         echo 'Disabled statusline!'
@@ -141,14 +141,14 @@ nnoremap cob :set background=<C-r>=&background == 'dark' ? 'light' : 'dark'<CR><
 nnoremap cod :<C-r>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
 
 " Toggle option {{{
-function! <SID>ToggleOption(option_name)
+function! s:ToggleOption(option_name)
     execute 'set' a:option_name.'!'
     execute 'set' a:option_name.'?'
 endfunction
 " }}}
 
 " Toggle local option {{{
-function! <SID>ToggleLocalOption(option_name)
+function! s:ToggleLocalOption(option_name)
     execute 'setlocal' a:option_name.'!'
     execute 'setlocal' a:option_name.'?'
 endfunction
@@ -170,7 +170,7 @@ nnoremap <silent> col :call <SID>ToggleLocalOption('list')<CR>
 nnoremap <silent> coe :call <SID>ToggleLocalOption('expandtab')<CR>
 
 " Toggle EOL {{{
-function! <SID>ToggleEOL()
+function! s:ToggleEOL()
     if match(&listchars, 'eol:¬') > -1
         setlocal listchars-=eol:¬
     else
@@ -189,9 +189,6 @@ nnoremap <silent> cor :call <SID>ToggleLocalOption('relativenumber')<CR>
 
 " Toggle cursorline
 nnoremap <silent> coc :call <SID>ToggleLocalOption('cursorline')<CR>
-
-" Toggle paste
-nnoremap <silent> cop :call <SID>ToggleLocalOption('paste')<CR>
 
 " Toggle spell checking
 nnoremap <silent> cos :call <SID>ToggleLocalOption('spell')<CR>
@@ -226,7 +223,8 @@ function! s:CheckQuickfixBufnrOnBufWinLeave()
     endif
 endfunction
 
-augroup vim-toogler
+augroup vim-toogler-quickfix
+    autocmd!
     autocmd BufWinEnter quickfix call <SID>SetQuickfixBufnrOnBufWinEnter()
     autocmd BufWinLeave *        call <SID>CheckQuickfixBufnrOnBufWinLeave()
 augroup END
@@ -241,4 +239,25 @@ nnoremap <silent> coz :let &scrolloff = 999 - &scrolloff<CR>:echo "scrolloff = "
 " Toggle showcmd
 nnoremap <silent> co; :call <SID>ToggleOption('showcmd')<CR>
 
-let g:loaded_toggler = '0.7.0'
+" Enter insert mode with paste {{{
+function! s:EnterInsertModeWithPaste()
+    let s:paste = &paste
+    let s:mouse = &mouse
+    set paste
+    set mouse=
+endfunction
+
+nnoremap <silent> yo :call <SID>EnterInsertModeWithPaste()<CR>o
+nnoremap <silent> yO :call <SID>EnterInsertModeWithPaste()<CR>O
+
+augroup vim-toggler-paste
+    autocmd!
+    autocmd InsertLeave *
+                \ if exists('s:paste') |
+                \   let [&paste, &mouse] = [s:paste, s:mouse] |
+                \   unlet s:paste s:mouse |
+                \ endif
+augroup END
+" }}}
+
+let g:loaded_toggler = '0.8.0'
