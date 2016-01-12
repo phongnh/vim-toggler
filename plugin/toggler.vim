@@ -223,6 +223,8 @@ function! s:CheckQuickfixBufnrOnBufWinLeave()
     endif
 endfunction
 
+nnoremap <silent> cop :call <SID>ToggleOption('paste')<CR>
+
 augroup vim-toogler-quickfix
     autocmd!
     autocmd BufWinEnter quickfix call <SID>SetQuickfixBufnrOnBufWinEnter()
@@ -260,4 +262,4 @@ augroup vim-toggler-paste
 augroup END
 " }}}
 
-let g:loaded_toggler = '0.8.0'
+let g:loaded_toggler = '0.9.0'
