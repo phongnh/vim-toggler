@@ -134,12 +134,6 @@ nnoremap co$ :setlocal tabstop=4<CR>
 nnoremap co* :setlocal tabstop=8<CR>
 " }}}
 
-" Toggle background
-nnoremap cob :set background=<C-r>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
-
-" Toggle diff
-nnoremap cod :<C-r>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
-
 " Toggle option {{{
 function! s:ToggleOption(option_name)
     execute 'set' a:option_name.'!'
@@ -157,15 +151,6 @@ endfunction
 " Toggle folding
 nnoremap <silent> cof :call <SID>ToggleLocalOption('foldenable')<CR>
 
-" Toggle hlsearch
-nnoremap <silent> coh :call <SID>ToggleLocalOption('hlsearch')<CR>
-
-" Toggle ignorecase
-nnoremap <silent> coi :call <SID>ToggleLocalOption('ignorecase')<CR>
-
-" Toggle list
-nnoremap <silent> col :call <SID>ToggleLocalOption('list')<CR>
-
 " Toggle expandtab
 nnoremap <silent> coe :call <SID>ToggleLocalOption('expandtab')<CR>
 
@@ -180,21 +165,6 @@ endfunction
 
 nnoremap <silent> coE :call <SID>ToggleEOL()<CR>
 " }}}
-
-" Toggle number
-nnoremap <silent> con :call <SID>ToggleLocalOption('number')<CR>
-
-" Toggle relativenumber
-nnoremap <silent> cor :call <SID>ToggleLocalOption('relativenumber')<CR>
-
-" Toggle cursorline
-nnoremap <silent> coc :call <SID>ToggleLocalOption('cursorline')<CR>
-
-" Toggle spell checking
-nnoremap <silent> cos :call <SID>ToggleLocalOption('spell')<CR>
-
-" Toggle wrap
-nnoremap <silent> cow :call <SID>ToggleLocalOption('wrap')<CR>
 
 " Toggle quickfix / location list {{{
 function! s:ToggleQuickfix()
@@ -223,8 +193,6 @@ function! s:CheckQuickfixBufnrOnBufWinLeave()
     endif
 endfunction
 
-nnoremap <silent> cop :call <SID>ToggleOption('paste')<CR>
-
 augroup vim-toogler-quickfix
     autocmd!
     autocmd BufWinEnter quickfix call <SID>SetQuickfixBufnrOnBufWinEnter()
@@ -235,31 +203,45 @@ nnoremap <silent> coq :call <SID>ToggleQuickfix()<CR>
 nnoremap <silent> coQ :call <SID>ToggleLocationList()<CR>
 " }}}
 
+" Toggle paste
+" nnoremap <silent> cop :call <SID>ToggleOption('paste')<CR>
+
 " Toggle "keep current line in the center of the screen" mode
 nnoremap <silent> coz :let &scrolloff = 999 - &scrolloff<CR>:echo "scrolloff = " . &scrolloff<CR>
 
 " Toggle showcmd
 nnoremap <silent> co; :call <SID>ToggleOption('showcmd')<CR>
 
-" Enter insert mode with paste {{{
-function! s:EnterInsertModeWithPaste()
-    let s:paste = &paste
-    let s:mouse = &mouse
-    set paste
-    set mouse=
-endfunction
+if get(g:, 'vim_toggler_standalone', 0)
+    " Toggle background
+    nnoremap cob :set background=<C-r>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
 
-nnoremap <silent> yo :call <SID>EnterInsertModeWithPaste()<CR>o
-nnoremap <silent> yO :call <SID>EnterInsertModeWithPaste()<CR>O
+    " Toggle diff
+    nnoremap cod :<C-r>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
 
-augroup vim-toggler-paste
-    autocmd!
-    autocmd InsertLeave *
-                \ if exists('s:paste') |
-                \   let [&paste, &mouse] = [s:paste, s:mouse] |
-                \   unlet s:paste s:mouse |
-                \ endif
-augroup END
-" }}}
+    " Toggle hlsearch
+    nnoremap <silent> coh :call <SID>ToggleLocalOption('hlsearch')<CR>
 
-let g:loaded_toggler = '0.9.0'
+    " Toggle ignorecase
+    nnoremap <silent> coi :call <SID>ToggleLocalOption('ignorecase')<CR>
+
+    " Toggle list
+    nnoremap <silent> col :call <SID>ToggleLocalOption('list')<CR>
+
+    " Toggle number
+    nnoremap <silent> con :call <SID>ToggleLocalOption('number')<CR>
+
+    " Toggle relativenumber
+    nnoremap <silent> cor :call <SID>ToggleLocalOption('relativenumber')<CR>
+
+    " Toggle cursorline
+    nnoremap <silent> coc :call <SID>ToggleLocalOption('cursorline')<CR>
+
+    " Toggle spell checking
+    nnoremap <silent> cos :call <SID>ToggleLocalOption('spell')<CR>
+
+    " Toggle wrap
+    nnoremap <silent> cow :call <SID>ToggleLocalOption('wrap')<CR>
+endif
+
+let g:loaded_toggler = '0.10.0'
