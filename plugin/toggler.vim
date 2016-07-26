@@ -250,4 +250,4 @@ if get(g:, 'vim_toggler_quickfix', 0)
     " }}}
 endif
 
-let g:loaded_toggler = '0.10.0'
+let g:loaded_toggler = '0.11.0'
