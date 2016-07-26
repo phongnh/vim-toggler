@@ -170,43 +170,6 @@ endfunction
 nnoremap <silent> coE :call <SID>ToggleEOL()<CR>
 " }}}
 
-" Toggle quickfix / location list {{{
-function! s:ToggleQuickfix()
-    if exists("s:quickfix_bufnr")
-        silent! cclose
-    else
-        silent! copen
-    endif
-endfunction
-
-function! s:ToggleLocationList()
-    if exists("s:quickfix_bufnr")
-        silent! lclose
-    else
-        silent! lopen
-    endif
-endfunction
-
-function! s:SetQuickfixBufnrOnBufWinEnter()
-    let s:quickfix_bufnr = bufnr('$')
-endfunction
-
-function! s:CheckQuickfixBufnrOnBufWinLeave()
-    if exists("s:quickfix_bufnr") && s:quickfix_bufnr == expand("<abuf>")
-        unlet s:quickfix_bufnr
-    endif
-endfunction
-
-augroup vim-toogler-quickfix
-    autocmd!
-    autocmd BufWinEnter quickfix call <SID>SetQuickfixBufnrOnBufWinEnter()
-    autocmd BufWinLeave *        call <SID>CheckQuickfixBufnrOnBufWinLeave()
-augroup END
-
-nnoremap <silent> coq :call <SID>ToggleQuickfix()<CR>
-nnoremap <silent> coQ :call <SID>ToggleLocationList()<CR>
-" }}}
-
 " Toggle paste
 nnoremap <silent> cop :call <SID>ToggleOption('paste')<CR>
 
@@ -246,6 +209,45 @@ if get(g:, 'vim_toggler_standalone', 0)
 
     " Toggle wrap
     nnoremap <silent> cow :call <SID>ToggleLocalOption('wrap')<CR>
+endif
+
+if get(g:, 'vim_toggler_quickfix', 0)
+    " Toggle quickfix / location list {{{
+    function! s:ToggleQuickfix()
+        if exists("s:quickfix_bufnr")
+            silent! cclose
+        else
+            silent! copen
+        endif
+    endfunction
+
+    function! s:ToggleLocationList()
+        if exists("s:quickfix_bufnr")
+            silent! lclose
+        else
+            silent! lopen
+        endif
+    endfunction
+
+    function! s:SetQuickfixBufnrOnBufWinEnter()
+        let s:quickfix_bufnr = bufnr('$')
+    endfunction
+
+    function! s:CheckQuickfixBufnrOnBufWinLeave()
+        if exists("s:quickfix_bufnr") && s:quickfix_bufnr == expand("<abuf>")
+            unlet s:quickfix_bufnr
+        endif
+    endfunction
+
+    augroup vim-toogler-quickfix
+        autocmd!
+        autocmd BufWinEnter quickfix call <SID>SetQuickfixBufnrOnBufWinEnter()
+        autocmd BufWinLeave *        call <SID>CheckQuickfixBufnrOnBufWinLeave()
+    augroup END
+
+    nnoremap <silent> coq :call <SID>ToggleQuickfix()<CR>
+    nnoremap <silent> coQ :call <SID>ToggleLocationList()<CR>
+    " }}}
 endif
 
 let g:loaded_toggler = '0.10.0'
