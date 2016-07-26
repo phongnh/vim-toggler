@@ -74,8 +74,8 @@ endif
 
 " Toggle clipboard {{{
 if has('clipboard')
-    function! s:ToggleClipboard()
-        if has('unnamedplus')
+    if has('unnamedplus')
+        function! s:ToggleClipboard()
             if match(&clipboard, 'unnamedplus') > -1
                 set clipboard-=unamedplus
                 echo 'Disabled "unnamedplus" clipboard!'
@@ -83,7 +83,9 @@ if has('clipboard')
                 set clipboard+=unnamedplus
                 echo 'Enabled "unnamedplus" clipboard!'
             endif
-        else
+        endfunction
+    else
+        function! s:ToggleClipboard()
             if match(&clipboard, 'unnamed') > -1
                 set clipboard-=unnamed
                 echo 'Disabled "unnamed" clipboard!'
@@ -91,8 +93,8 @@ if has('clipboard')
                 set clipboard+=unnamed
                 echo 'Enabled "unnamed" clipboard!'
             endif
-        endif
-    endfunction
+        endfunction
+    endif
 
     nnoremap <silent> coy :call <SID>ToggleClipboard()<CR>
 endif
