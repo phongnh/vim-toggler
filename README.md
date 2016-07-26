@@ -21,6 +21,7 @@ Toggle useful options:
 * number (con)
 * relativenumber (cor)
 * cursorline (coc)
+* paste (cop)
 * spell (cos)
 * wrap (cow)
 * quickfix (coq)

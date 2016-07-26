@@ -208,7 +208,7 @@ nnoremap <silent> coQ :call <SID>ToggleLocationList()<CR>
 " }}}
 
 " Toggle paste
-" nnoremap <silent> cop :call <SID>ToggleOption('paste')<CR>
+nnoremap <silent> cop :call <SID>ToggleOption('paste')<CR>
 
 " Toggle "keep current line in the center of the screen" mode
 nnoremap <silent> coz :let &scrolloff = 999 - &scrolloff<CR>:echo "scrolloff = " . &scrolloff<CR>
