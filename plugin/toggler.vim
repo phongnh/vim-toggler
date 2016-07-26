@@ -4,8 +4,10 @@ endif
 
 " Toggle conceallevel {{{
 if has('conceal')
-    function! s:ToggleConceallevel()
+    function! s:CycleConceallevel()
         if &conceallevel == 0
+            set conceallevel=1
+        elseif &conceallevel == 1
             set conceallevel=2
         else
             set conceallevel=0
@@ -14,7 +16,7 @@ if has('conceal')
         echo "conceallevel = " . &conceallevel
     endfunction
 
-    nnoremap <silent> coa :call <SID>ToggleConceallevel()<CR>
+    nnoremap <silent> cok :call <SID>CycleConceallevel()<CR>
 endif
 " }}}
 

@@ -2,7 +2,7 @@
 
 Toggle useful options:
 
-* conceallevel (coa)
+* conceallevel (cok)
 * exchange gj and j, gk and k (com)
 * mouse (coM)
 * "unnamed" or "unnamedplus" clipboard (coy)
@@ -27,7 +27,6 @@ Toggle useful options:
 * location list (coQ)
 * scrolloff (coz)
 * showcmd (co;)
-* enter insert mode with paste (yo / yO) (it is copied from vim-unimpaired)
 
 ## Installation
 
