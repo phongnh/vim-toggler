@@ -6,9 +6,9 @@ endif
 if has('conceal')
     function! s:ToggleConceallevel()
         if &conceallevel == 0
-            set conceallevel=0
-        else
             set conceallevel=2
+        else
+            set conceallevel=0
         endif
 
         echo "conceallevel = " . &conceallevel
