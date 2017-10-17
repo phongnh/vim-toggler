@@ -14,6 +14,7 @@ if has('conceal')
         echo "conceallevel = " . &conceallevel
     endfunction
 
+    nnoremap <silent> =ok :call <SID>ToggleConceallevel()<CR>
     nnoremap <silent> cok :call <SID>ToggleConceallevel()<CR>
 endif
 " }}}
@@ -51,6 +52,7 @@ function! s:ToggleGJK()
     endif
 endfunction
 
+nnoremap <silent> =om :call <SID>ToggleGJK()<CR>
 nnoremap <silent> com :call <SID>ToggleGJK()<CR>
 " }}}
 
@@ -66,6 +68,7 @@ if has('mouse')
         endif
     endfunction
 
+    nnoremap <silent> =oM :call <SID>ToggleMouse()<CR>
     nnoremap <silent> coM :call <SID>ToggleMouse()<CR>
 endif
 " }}}
@@ -94,6 +97,7 @@ if has('clipboard')
         endfunction
     endif
 
+    nnoremap <silent> =oy :call <SID>ToggleClipboard()<CR>
     nnoremap <silent> coy :call <SID>ToggleClipboard()<CR>
 endif
 " }}}
@@ -109,6 +113,7 @@ function! s:ToggleTabline()
     endif
 endfunction
 
+nnoremap <silent> =ot :call <SID>ToggleTabline()<CR>
 nnoremap <silent> cot :call <SID>ToggleTabline()<CR>
 " }}}
 
@@ -123,14 +128,21 @@ function! s:ToggleStatusline()
     endif
 endfunction
 
+nnoremap <silent> =oT :call <SID>ToggleStatusline()<CR>
 nnoremap <silent> coT :call <SID>ToggleStatusline()<CR>
 " }}}
 
 " Change tab width {{{
+nnoremap <silent> =o2 :setlocal tabstop=2 softtabstop=2 shiftwidth=2<CR>:echo "Spaces: " . &shiftwidth<CR>
+nnoremap <silent> =o4 :setlocal tabstop=4 softtabstop=4 shiftwidth=4<CR>:echo "Spaces: " . &shiftwidth<CR>
+nnoremap <silent> =o8 :setlocal tabstop=8 softtabstop=8 shiftwidth=8<CR>:echo "Spaces: " . &shiftwidth<CR>
 nnoremap <silent> co2 :setlocal tabstop=2 softtabstop=2 shiftwidth=2<CR>:echo "Spaces: " . &shiftwidth<CR>
 nnoremap <silent> co4 :setlocal tabstop=4 softtabstop=4 shiftwidth=4<CR>:echo "Spaces: " . &shiftwidth<CR>
 nnoremap <silent> co8 :setlocal tabstop=8 softtabstop=8 shiftwidth=8<CR>:echo "Spaces: " . &shiftwidth<CR>
 
+nnoremap =o@ :setlocal tabstop=2<CR>
+nnoremap =o$ :setlocal tabstop=4<CR>
+nnoremap =o* :setlocal tabstop=8<CR>
 nnoremap co@ :setlocal tabstop=2<CR>
 nnoremap co$ :setlocal tabstop=4<CR>
 nnoremap co* :setlocal tabstop=8<CR>
@@ -151,9 +163,11 @@ endfunction
 " }}}
 
 " Toggle folding
+nnoremap <silent> =of :call <SID>ToggleLocalOption('foldenable')<CR>
 nnoremap <silent> cof :call <SID>ToggleLocalOption('foldenable')<CR>
 
 " Toggle expandtab
+nnoremap <silent> =oe :call <SID>ToggleLocalOption('expandtab')<CR>
 nnoremap <silent> coe :call <SID>ToggleLocalOption('expandtab')<CR>
 
 " Toggle EOL {{{
@@ -165,47 +179,61 @@ function! s:ToggleEOL()
     endif
 endfunction
 
+nnoremap <silent> =oE :call <SID>ToggleEOL()<CR>
 nnoremap <silent> coE :call <SID>ToggleEOL()<CR>
 " }}}
 
 " Toggle paste
+nnoremap <silent> =op :call <SID>ToggleOption('paste')<CR>
 nnoremap <silent> cop :call <SID>ToggleOption('paste')<CR>
 
 " Toggle "keep current line in the center of the screen" mode
+nnoremap <silent> =oz :let &scrolloff = 999 - &scrolloff<CR>:echo "scrolloff = " . &scrolloff<CR>
 nnoremap <silent> coz :let &scrolloff = 999 - &scrolloff<CR>:echo "scrolloff = " . &scrolloff<CR>
 
 " Toggle showcmd
+nnoremap <silent> =o; :call <SID>ToggleOption('showcmd')<CR>
 nnoremap <silent> co; :call <SID>ToggleOption('showcmd')<CR>
 
 if get(g:, 'vim_toggler_standalone', 0)
     " Toggle background
+    nnoremap =ob :set background=<C-r>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
     nnoremap cob :set background=<C-r>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
 
     " Toggle diff
+    nnoremap =od :<C-r>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
     nnoremap cod :<C-r>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
 
     " Toggle hlsearch
+    nnoremap <silent> =oh :call <SID>ToggleLocalOption('hlsearch')<CR>
     nnoremap <silent> coh :call <SID>ToggleLocalOption('hlsearch')<CR>
 
     " Toggle ignorecase
+    nnoremap <silent> =oi :call <SID>ToggleLocalOption('ignorecase')<CR>
     nnoremap <silent> coi :call <SID>ToggleLocalOption('ignorecase')<CR>
 
     " Toggle list
+    nnoremap <silent> =ol :call <SID>ToggleLocalOption('list')<CR>
     nnoremap <silent> col :call <SID>ToggleLocalOption('list')<CR>
 
     " Toggle number
+    nnoremap <silent> =on :call <SID>ToggleLocalOption('number')<CR>
     nnoremap <silent> con :call <SID>ToggleLocalOption('number')<CR>
 
     " Toggle relativenumber
+    nnoremap <silent> =or :call <SID>ToggleLocalOption('relativenumber')<CR>
     nnoremap <silent> cor :call <SID>ToggleLocalOption('relativenumber')<CR>
 
     " Toggle cursorline
+    nnoremap <silent> =oc :call <SID>ToggleLocalOption('cursorline')<CR>
     nnoremap <silent> coc :call <SID>ToggleLocalOption('cursorline')<CR>
 
     " Toggle spell checking
+    nnoremap <silent> =os :call <SID>ToggleLocalOption('spell')<CR>
     nnoremap <silent> cos :call <SID>ToggleLocalOption('spell')<CR>
 
     " Toggle wrap
+    nnoremap <silent> =ow :call <SID>ToggleLocalOption('wrap')<CR>
     nnoremap <silent> cow :call <SID>ToggleLocalOption('wrap')<CR>
 endif
 
@@ -243,9 +271,11 @@ if get(g:, 'vim_toggler_quickfix', 0)
         autocmd BufWinLeave *        call <SID>CheckQuickfixBufnrOnBufWinLeave()
     augroup END
 
+    nnoremap <silent> =oq :call <SID>ToggleQuickfix()<CR>
+    nnoremap <silent> =oQ :call <SID>ToggleLocationList()<CR>
     nnoremap <silent> coq :call <SID>ToggleQuickfix()<CR>
     nnoremap <silent> coQ :call <SID>ToggleLocationList()<CR>
     " }}}
 endif
 
-let g:loaded_toggler = '0.11.0'
+let g:loaded_toggler = '0.12.0'
