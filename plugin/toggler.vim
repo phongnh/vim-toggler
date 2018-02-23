@@ -75,7 +75,7 @@ if has('clipboard')
     if has('unnamedplus')
         function! s:ToggleClipboard()
             if match(&clipboard, 'unnamedplus') > -1
-                set clipboard-=unamedplus
+                set clipboard-=unnamedplus
                 echo 'Disabled "unnamedplus" clipboard!'
             else
                 set clipboard+=unnamedplus
