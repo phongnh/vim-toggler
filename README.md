@@ -2,32 +2,21 @@
 
 Toggle useful options:
 
-* conceallevel (=ok)
+* set tabstop, softtabstop and shiftwidth (=o2 -> 2, =o4 -> 4, and =o8 -> 8)
+* set tabstop (=o@ -> 2, =o$ -> 4, and =o\* -> 8)
 * exchange gj and j, gk and k (=om)
 * mouse (=oM)
 * "unnamed" or "unnamedplus" clipboard (=oy)
 * tabline (showtabline) (=ot)
 * statusline (laststatus) (=oT)
-* set tabstop, softtabstop and shiftwidth (=o2 -> 2, =o4 -> 4, and =o8 -> 8)
-* set tabstop (=o@ -> 2, =o$ -> 4, and =o\* -> 8)
-* background (=ob)
-* diffthis (=od)
-* folding (foldenable) (=of)
-* hlsearch (=oh)
-* ignorecase (=oi)
-* list (=ol)
+* conceallevel (=ok)
 * expandtab (=oe)
 * eol of listchars (=oE)
-* number (=on)
-* relativenumber (=or)
-* cursorline (=oc)
-* paste (=op)
-* spell (=os)
-* wrap (=ow)
-* quickfix (=oq)
-* location list (=oQ)
+* folding (foldenable) (=of)
 * scrolloff (=oz)
 * showcmd (=o;)
+* quickfix (=oq)
+* location list (=oQ)
 
 ## Installation
 

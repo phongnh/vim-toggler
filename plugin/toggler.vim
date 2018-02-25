@@ -2,62 +2,56 @@ if exists('g:loaded_toggler')
     finish
 endif
 
-" Toggle conceallevel {{{
-if has('conceal')
-    function! s:ToggleConceallevel()
-        if &conceallevel == 0
-            set conceallevel=2
-        else
-            set conceallevel=0
-        endif
+" Change tab width {{{
+nnoremap <silent> =o2 :setlocal tabstop=2 softtabstop=2 shiftwidth=2 shiftwidth<CR>
+nnoremap <silent> =o4 :setlocal tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth<CR>
+nnoremap <silent> =o8 :setlocal tabstop=8 softtabstop=8 shiftwidth=8 shiftwidth<CR>
 
-        echo "conceallevel = " . &conceallevel
-    endfunction
-
-    nmap <silent> =ok :call <SID>ToggleConceallevel()<CR>
-endif
+nnoremap <silent> =o@ :setlocal tabstop=2<CR>:setlocal tabstop?<CR>
+nnoremap <silent> =o$ :setlocal tabstop=4<CR>:setlocal tabstop?<CR>
+nnoremap <silent> =o* :setlocal tabstop=8<CR>:setlocal tabstop?<CR>
 " }}}
 
 " Exchange gj and gk to j and k {{{
-function! s:ToggleGJK()
-    if exists('s:enabled_gjk') && s:enabled_gjk
+function! s:ToggleGJK() abort
+    if get(s:, 'enabled_gjk', 0)
         let s:enabled_gjk = 0
 
-        noremap <buffer> j  j
-        noremap <buffer> k  k
-        noremap <buffer> gj gj
-        noremap <buffer> gk gk
+        noremap  <buffer> j j
+        xnoremap <buffer> j j
+        noremap  <buffer> k k
+        xnoremap <buffer> k k
 
-        xnoremap <buffer> j  j
-        xnoremap <buffer> k  k
+        noremap  <buffer> gj gj
         xnoremap <buffer> gj gj
+        noremap  <buffer> gk gk
         xnoremap <buffer> gk gk
 
-        echo "Disabled gj and gk!"
+        echo 'Disabled gj and gk!'
     else
         let s:enabled_gjk = 1
 
-        noremap <buffer> j  gj
-        noremap <buffer> k  gk
-        noremap <buffer> gj j
-        noremap <buffer> gk k
+        noremap  <buffer> j gj
+        xnoremap <buffer> j gj
+        noremap  <buffer> k gk
+        xnoremap <buffer> k gk
 
-        xnoremap <buffer> j  gj
-        xnoremap <buffer> k  gk
+        noremap  <buffer> gj j
         xnoremap <buffer> gj j
+        noremap  <buffer> gk k
         xnoremap <buffer> gk k
 
-        echo "Enabled gj and gk!"
+        echo 'Enabled gj and gk!'
     endif
 endfunction
 
-nmap <silent> =om :call <SID>ToggleGJK()<CR>
+nnoremap <silent> =om :call <SID>ToggleGJK()<CR>
 " }}}
 
 " Toggle mouse {{{
 if has('mouse')
     function! s:ToggleMouse()
-        if &mouse == ""
+        if &mouse == ''
             set mouse=a
             echo 'Mouse is for Vim (' . &mouse . ')'
         else
@@ -66,98 +60,93 @@ if has('mouse')
         endif
     endfunction
 
-    nmap <silent> =oM :call <SID>ToggleMouse()<CR>
+    nnoremap <silent> =oM :call <SID>ToggleMouse()<CR>
 endif
 " }}}
 
 " Toggle clipboard {{{
 if has('clipboard')
     if has('unnamedplus')
-        function! s:ToggleClipboard()
-            if match(&clipboard, 'unnamedplus') > -1
-                set clipboard-=unnamedplus
-                echo 'Disabled "unnamedplus" clipboard!'
-            else
-                set clipboard+=unnamedplus
-                echo 'Enabled "unnamedplus" clipboard!'
-            endif
-        endfunction
+        let s:clipboard = 'unnamedplus'
     else
-        function! s:ToggleClipboard()
-            if match(&clipboard, 'unnamed') > -1
-                set clipboard-=unnamed
-                echo 'Disabled "unnamed" clipboard!'
-            else
-                set clipboard+=unnamed
-                echo 'Enabled "unnamed" clipboard!'
-            endif
-        endfunction
+        let s:clipboard = 'unnamed'
     endif
 
-    nmap <silent> =oy :call <SID>ToggleClipboard()<CR>
+    function! s:ToggleClipboard()
+        if match(&clipboard, s:clipboard) > -1
+            execute printf('set clipboard-=%s', s:clipboard)
+            echo printf('Disabled "%s" clipboard!', s:clipboard)
+        else
+            execute printf('set clipboard+=%s', s:clipboard)
+            echo printf('Enabled "%s" clipboard!', s:clipboard)
+        endif
+    endfunction
+
+    nnoremap <silent> =oy :call <SID>ToggleClipboard()<CR>
 endif
 " }}}
 
-" Toggle Tabline {{{
-function! s:ToggleTabline()
-    if &showtabline == 2
-        set showtabline=0
-        echo 'Disabled tabline!'
+" Cycle Tabline {{{
+function! s:CycleTabline() abort
+    if &showtabline == 0
+        set showtabline=1 showtabline
+    elseif &showtabline == 1
+        set showtabline=2 showtabline
     else
-        set showtabline=2
-        echo 'Enabled tabline!'
+        set showtabline=0 showtabline
     endif
 endfunction
 
-nmap <silent> =ot :call <SID>ToggleTabline()<CR>
+nnoremap <silent> =ot :call <SID>CycleTabline()<CR>
 " }}}
 
-" Toggle statusline {{{
-function! s:ToggleStatusline()
-    if &laststatus == 2
-        set laststatus=0
-        echo 'Disabled statusline!'
+" Cycle statusline {{{
+function! s:CycleStatusline() abort
+    if &laststatus == 0
+        set laststatus=1 laststatus
+    elseif &laststatus == 1
+        set laststatus=2 laststatus
     else
-        set laststatus=2
-        echo 'Enabled statusline!'
+        set laststatus=0 laststatus
     endif
 endfunction
 
-nmap <silent> =oT :call <SID>ToggleStatusline()<CR>
+nnoremap <silent> =oT :call <SID>CycleStatusline()<CR>
 " }}}
 
-" Change tab width {{{
-nmap <silent> =o2 :setlocal tabstop=2 softtabstop=2 shiftwidth=2<CR>:echo "Spaces: " . &shiftwidth<CR>
-nmap <silent> =o4 :setlocal tabstop=4 softtabstop=4 shiftwidth=4<CR>:echo "Spaces: " . &shiftwidth<CR>
-nmap <silent> =o8 :setlocal tabstop=8 softtabstop=8 shiftwidth=8<CR>:echo "Spaces: " . &shiftwidth<CR>
+" Cycle  conceallevel {{{
+if has('conceal')
+    function! s:CycleConceallevel()
+        if &conceallevel == 0
+            set conceallevel=1 conceallevel
+        elseif &conceallevel = 1
+            set conceallevel=2 conceallevel
+        else
+            set conceallevel=0 conceallevel
+        endif
+    endfunction
 
-nmap <silent> =o@ :setlocal tabstop=2<CR>:setlocal tabstop?<CR>
-nmap <silent> =o$ :setlocal tabstop=4<CR>:setlocal tabstop?<CR>
-nmap <silent> =o* :setlocal tabstop=8<CR>:setlocal tabstop?<CR>
+    nnoremap <silent> =ok :call <SID>CycleConceallevel()<CR>
+endif
 " }}}
 
 " Toggle option {{{
-function! s:ToggleOption(option_name)
-    execute 'set' a:option_name.'!'
-    execute 'set' a:option_name.'?'
+function! s:ToggleOption(option_name) abort
+    execute printf('set %s! %s?', a:option_name, a:option_name)
 endfunction
 " }}}
 
 " Toggle local option {{{
-function! s:ToggleLocalOption(option_name)
-    execute 'setlocal' a:option_name.'!'
-    execute 'setlocal' a:option_name.'?'
+function! s:ToggleLocalOption(option_name) abort
+    execute printf('setlocal %s! %s?', a:option_name, a:option_name)
 endfunction
 " }}}
 
-" Toggle folding
-nmap <silent> =of :call <SID>ToggleLocalOption('foldenable')<CR>
-
 " Toggle expandtab
-nmap <silent> =oe :call <SID>ToggleLocalOption('expandtab')<CR>
+nnoremap <silent> =oe :call <SID>ToggleLocalOption('expandtab')<CR>
 
 " Toggle EOL {{{
-function! s:ToggleEOL()
+function! s:ToggleEOL() abort
     if match(&listchars, 'eol:¬') > -1
         setlocal listchars-=eol:¬
     else
@@ -165,49 +154,17 @@ function! s:ToggleEOL()
     endif
 endfunction
 
-nmap <silent> =oE :call <SID>ToggleEOL()<CR>
+nnoremap <silent> =oE :call <SID>ToggleEOL()<CR>
 " }}}
 
-" Toggle paste
-nmap <silent> =op :call <SID>ToggleOption('paste')<CR>
+" Toggle folding
+nnoremap <silent> =of :call <SID>ToggleLocalOption('foldenable')<CR>
 
 " Toggle "keep current line in the center of the screen" mode
-nmap <silent> =oz :let &scrolloff = 999 - &scrolloff<CR>:echo "scrolloff = " . &scrolloff<CR>
+nnoremap <silent> =oz :let &scrolloff = 999 - &scrolloff<CR>:set scrolloff<CR>
 
 " Toggle showcmd
-nmap <silent> =o; :call <SID>ToggleOption('showcmd')<CR>
-
-if get(g:, 'vim_toggler_standalone', 0)
-    " Toggle background
-    nmap =ob :set background=<C-r>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
-
-    " Toggle diff
-    nmap =od :<C-r>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
-
-    " Toggle hlsearch
-    nmap <silent> =oh :call <SID>ToggleLocalOption('hlsearch')<CR>
-
-    " Toggle ignorecase
-    nmap <silent> =oi :call <SID>ToggleLocalOption('ignorecase')<CR>
-
-    " Toggle list
-    nmap <silent> =ol :call <SID>ToggleLocalOption('list')<CR>
-
-    " Toggle number
-    nmap <silent> =on :call <SID>ToggleLocalOption('number')<CR>
-
-    " Toggle relativenumber
-    nmap <silent> =or :call <SID>ToggleLocalOption('relativenumber')<CR>
-
-    " Toggle cursorline
-    nmap <silent> =oc :call <SID>ToggleLocalOption('cursorline')<CR>
-
-    " Toggle spell checking
-    nmap <silent> =os :call <SID>ToggleLocalOption('spell')<CR>
-
-    " Toggle wrap
-    nmap <silent> =ow :call <SID>ToggleLocalOption('wrap')<CR>
-endif
+nnoremap <silent> =o; :call <SID>ToggleOption('showcmd')<CR>
 
 if get(g:, 'vim_toggler_quickfix', 0)
     " Toggle quickfix / location list {{{
@@ -243,9 +200,9 @@ if get(g:, 'vim_toggler_quickfix', 0)
         autocmd BufWinLeave *        call <SID>CheckQuickfixBufnrOnBufWinLeave()
     augroup END
 
-    nmap <silent> =oq :call <SID>ToggleQuickfix()<CR>
-    nmap <silent> =oQ :call <SID>ToggleLocationList()<CR>
+    nnoremap <silent> =oq :call <SID>ToggleQuickfix()<CR>
+    nnoremap <silent> =oQ :call <SID>ToggleLocationList()<CR>
     " }}}
 endif
 
-let g:loaded_toggler = '0.13.0'
+let g:loaded_toggler = '0.14.0'
