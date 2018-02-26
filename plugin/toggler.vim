@@ -89,12 +89,13 @@ endif
 " Cycle Tabline {{{
 function! s:CycleTabline() abort
     if &showtabline == 0
-        set showtabline=1 showtabline
+        set showtabline=1
     elseif &showtabline == 1
-        set showtabline=2 showtabline
+        set showtabline=2
     else
-        set showtabline=0 showtabline
+        set showtabline=0
     endif
+    set showtabline?
 endfunction
 
 nnoremap <silent> =ot :call <SID>CycleTabline()<CR>
@@ -103,12 +104,13 @@ nnoremap <silent> =ot :call <SID>CycleTabline()<CR>
 " Cycle statusline {{{
 function! s:CycleStatusline() abort
     if &laststatus == 0
-        set laststatus=1 laststatus
+        set laststatus=1
     elseif &laststatus == 1
-        set laststatus=2 laststatus
+        set laststatus=2
     else
-        set laststatus=0 laststatus
+        set laststatus=0
     endif
+    set  laststatus?
 endfunction
 
 nnoremap <silent> =oT :call <SID>CycleStatusline()<CR>
@@ -118,12 +120,13 @@ nnoremap <silent> =oT :call <SID>CycleStatusline()<CR>
 if has('conceal')
     function! s:CycleConceallevel()
         if &conceallevel == 0
-            set conceallevel=1 conceallevel
+            set conceallevel=1
         elseif &conceallevel = 1
-            set conceallevel=2 conceallevel
+            set conceallevel=2
         else
-            set conceallevel=0 conceallevel
+            set conceallevel=0
         endif
+        set conceallevel?
     endfunction
 
     nnoremap <silent> =ok :call <SID>CycleConceallevel()<CR>
@@ -152,6 +155,7 @@ function! s:ToggleEOL() abort
     else
         setlocal listchars+=eol:¬
     endif
+    setlocal listchars?
 endfunction
 
 nnoremap <silent> =oE :call <SID>ToggleEOL()<CR>
@@ -161,7 +165,7 @@ nnoremap <silent> =oE :call <SID>ToggleEOL()<CR>
 nnoremap <silent> =of :call <SID>ToggleLocalOption('foldenable')<CR>
 
 " Toggle "keep current line in the center of the screen" mode
-nnoremap <silent> =oz :let &scrolloff = 999 - &scrolloff<CR>:set scrolloff<CR>
+nnoremap <silent> =oz :let &scrolloff = 999 - &scrolloff<CR>:set scrolloff?<CR>
 
 " Toggle showcmd
 nnoremap <silent> =o; :call <SID>ToggleOption('showcmd')<CR>
@@ -205,4 +209,4 @@ if get(g:, 'vim_toggler_quickfix', 0)
     " }}}
 endif
 
-let g:loaded_toggler = '0.14.0'
+let g:loaded_toggler = '0.15.0'
