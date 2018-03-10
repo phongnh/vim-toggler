@@ -161,52 +161,10 @@ endfunction
 nnoremap <silent> =oE :call <SID>ToggleEOL()<CR>
 " }}}
 
-" Toggle folding
-nnoremap <silent> =of :call <SID>ToggleLocalOption('foldenable')<CR>
-
 " Toggle "keep current line in the center of the screen" mode
 nnoremap <silent> =oz :let &scrolloff = 999 - &scrolloff<CR>:set scrolloff?<CR>
 
 " Toggle showcmd
 nnoremap <silent> =o; :call <SID>ToggleOption('showcmd')<CR>
 
-if get(g:, 'vim_toggler_quickfix', 0)
-    " Toggle quickfix / location list {{{
-    function! s:ToggleQuickfix()
-        if exists("s:quickfix_bufnr")
-            silent! cclose
-        else
-            silent! copen
-        endif
-    endfunction
-
-    function! s:ToggleLocationList()
-        if exists("s:quickfix_bufnr")
-            silent! lclose
-        else
-            silent! lopen
-        endif
-    endfunction
-
-    function! s:SetQuickfixBufnrOnBufWinEnter()
-        let s:quickfix_bufnr = bufnr('$')
-    endfunction
-
-    function! s:CheckQuickfixBufnrOnBufWinLeave()
-        if exists("s:quickfix_bufnr") && s:quickfix_bufnr == expand("<abuf>")
-            unlet s:quickfix_bufnr
-        endif
-    endfunction
-
-    augroup vim-toogler-quickfix
-        autocmd!
-        autocmd BufWinEnter quickfix call <SID>SetQuickfixBufnrOnBufWinEnter()
-        autocmd BufWinLeave *        call <SID>CheckQuickfixBufnrOnBufWinLeave()
-    augroup END
-
-    nnoremap <silent> =oq :call <SID>ToggleQuickfix()<CR>
-    nnoremap <silent> =oQ :call <SID>ToggleLocationList()<CR>
-    " }}}
-endif
-
-let g:loaded_toggler = '0.15.0'
+let g:loaded_toggler = '0.16.0'

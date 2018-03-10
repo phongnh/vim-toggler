@@ -12,11 +12,8 @@ Toggle useful options:
 * conceallevel (=ok)
 * expandtab (=oe)
 * eol of listchars (=oE)
-* folding (foldenable) (=of)
 * scrolloff (=oz)
 * showcmd (=o;)
-* quickfix (=oq)
-* location list (=oQ)
 
 ## Installation
 
