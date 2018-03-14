@@ -14,6 +14,7 @@ Toggle useful options:
 * eol of listchars (=oE)
 * scrolloff (=oz)
 * showcmd (=o;)
+* foldmethod(=oo)
 
 ## Installation
 

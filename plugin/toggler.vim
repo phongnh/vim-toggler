@@ -1,8 +1,8 @@
-if exists('g:loaded_toggler')
+if get(g:, 'loaded_toggler', 0)
     finish
 endif
 
-" Change tab width {{{
+" Change tab width {
 nnoremap <silent> =o2 :setlocal tabstop=2 softtabstop=2 shiftwidth=2 shiftwidth<CR>
 nnoremap <silent> =o4 :setlocal tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth<CR>
 nnoremap <silent> =o8 :setlocal tabstop=8 softtabstop=8 shiftwidth=8 shiftwidth<CR>
@@ -10,9 +10,9 @@ nnoremap <silent> =o8 :setlocal tabstop=8 softtabstop=8 shiftwidth=8 shiftwidth<
 nnoremap <silent> =o@ :setlocal tabstop=2<CR>:setlocal tabstop?<CR>
 nnoremap <silent> =o$ :setlocal tabstop=4<CR>:setlocal tabstop?<CR>
 nnoremap <silent> =o* :setlocal tabstop=8<CR>:setlocal tabstop?<CR>
-" }}}
+" }
 
-" Exchange gj and gk to j and k {{{
+" Exchange gj and gk to j and k {
 function! s:ToggleGJK() abort
     if get(s:, 'enabled_gjk', 0)
         let s:enabled_gjk = 0
@@ -46,9 +46,9 @@ function! s:ToggleGJK() abort
 endfunction
 
 nnoremap <silent> =om :call <SID>ToggleGJK()<CR>
-" }}}
+" }
 
-" Toggle mouse {{{
+" Toggle mouse {
 if has('mouse')
     function! s:ToggleMouse()
         if &mouse == ''
@@ -62,9 +62,9 @@ if has('mouse')
 
     nnoremap <silent> =oM :call <SID>ToggleMouse()<CR>
 endif
-" }}}
+" }
 
-" Toggle clipboard {{{
+" Toggle clipboard {
 if has('clipboard')
     if has('unnamedplus')
         let s:clipboard = 'unnamedplus'
@@ -84,9 +84,9 @@ if has('clipboard')
 
     nnoremap <silent> =oy :call <SID>ToggleClipboard()<CR>
 endif
-" }}}
+" }
 
-" Cycle Tabline {{{
+" Cycle Tabline {
 function! s:CycleTabline() abort
     if &showtabline == 0
         set showtabline=1
@@ -99,9 +99,9 @@ function! s:CycleTabline() abort
 endfunction
 
 nnoremap <silent> =ot :call <SID>CycleTabline()<CR>
-" }}}
+" }
 
-" Cycle statusline {{{
+" Cycle statusline {
 function! s:CycleStatusline() abort
     if &laststatus == 0
         set laststatus=1
@@ -114,9 +114,9 @@ function! s:CycleStatusline() abort
 endfunction
 
 nnoremap <silent> =oT :call <SID>CycleStatusline()<CR>
-" }}}
+" }
 
-" Cycle  conceallevel {{{
+" Cycle  conceallevel {
 if has('conceal')
     function! s:CycleConceallevel()
         if &conceallevel == 0
@@ -131,24 +131,24 @@ if has('conceal')
 
     nnoremap <silent> =ok :call <SID>CycleConceallevel()<CR>
 endif
-" }}}
+" }
 
-" Toggle option {{{
+" Toggle option {
 function! s:ToggleOption(option_name) abort
     execute printf('set %s! %s?', a:option_name, a:option_name)
 endfunction
-" }}}
+" }
 
-" Toggle local option {{{
+" Toggle local option {
 function! s:ToggleLocalOption(option_name) abort
     execute printf('setlocal %s! %s?', a:option_name, a:option_name)
 endfunction
-" }}}
+" }
 
 " Toggle expandtab
 nnoremap <silent> =oe :call <SID>ToggleLocalOption('expandtab')<CR>
 
-" Toggle EOL {{{
+" Toggle EOL {
 function! s:ToggleEOL() abort
     if match(&listchars, 'eol:¬') > -1
         setlocal listchars-=eol:¬
@@ -159,7 +159,7 @@ function! s:ToggleEOL() abort
 endfunction
 
 nnoremap <silent> =oE :call <SID>ToggleEOL()<CR>
-" }}}
+" }
 
 " Toggle "keep current line in the center of the screen" mode
 nnoremap <silent> =oz :let &scrolloff = 999 - &scrolloff<CR>:set scrolloff?<CR>
@@ -167,4 +167,28 @@ nnoremap <silent> =oz :let &scrolloff = 999 - &scrolloff<CR>:set scrolloff?<CR>
 " Toggle showcmd
 nnoremap <silent> =o; :call <SID>ToggleOption('showcmd')<CR>
 
-let g:loaded_toggler = '0.16.0'
+" Improve toggling foldenable
+nnoremap zi zi:set foldenable?<CR>
+
+" Cycle Fold Method {
+function! s:CycleFoldMethod() abort
+    if &foldmethod == 'manual'
+        set foldmethod=indent
+    elseif &foldmethod == 'indent'
+        set foldmethod=expr
+    elseif &foldmethod == 'expr'
+        set foldmethod=marker
+    elseif &foldmethod == 'marker'
+        set foldmethod=syntax
+    elseif &foldmethod == 'syntax'
+        set foldmethod=diff
+    else
+        set foldmethod=manual
+    endif
+    set foldmethod?
+endfunction
+
+nnoremap <silent> =oo :call <SID>CycleFoldMethod()<CR>
+" }
+
+let g:loaded_toggler = 1
