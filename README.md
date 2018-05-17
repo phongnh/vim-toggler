@@ -2,19 +2,19 @@
 
 Toggle useful options:
 
-* set tabstop, softtabstop and shiftwidth (=o2 -> 2, =o4 -> 4, and =o8 -> 8)
-* set tabstop (=o@ -> 2, =o$ -> 4, and =o\* -> 8)
-* exchange gj and j, gk and k (=om)
-* mouse (=oM)
-* "unnamed" or "unnamedplus" clipboard (=oy)
-* tabline (showtabline) (=ot)
-* statusline (laststatus) (=oT)
-* conceallevel (=ok)
-* expandtab (=oe)
-* eol of listchars (=oE)
-* scrolloff (=oz)
-* showcmd (=o;)
-* foldmethod(=oo)
+* set tabstop, softtabstop and shiftwidth (yo2 -> 2, yo4 -> 4, and yo8 -> 8)
+* set tabstop (yo@ -> 2, yo$ -> 4, and yo\* -> 8)
+* exchange gj and j, gk and k (yom)
+* mouse (yoM)
+* "unnamed" or "unnamedplus" clipboard (yoy)
+* tabline (showtabline) (yot)
+* statusline (laststatus) (yoT)
+* conceallevel (yok)
+* expandtab (yoe)
+* eol of listchars (yoE)
+* scrolloff (yoz)
+* showcmd (yo;)
+* foldmethod(yoo)
 
 ## Installation
 

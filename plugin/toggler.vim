@@ -3,13 +3,13 @@ if get(g:, 'loaded_toggler', 0)
 endif
 
 " Change tab width {
-nnoremap <silent> =o2 :setlocal tabstop=2 softtabstop=2 shiftwidth=2 shiftwidth<CR>
-nnoremap <silent> =o4 :setlocal tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth<CR>
-nnoremap <silent> =o8 :setlocal tabstop=8 softtabstop=8 shiftwidth=8 shiftwidth<CR>
+nnoremap <silent> yo2 :setlocal tabstop=2 softtabstop=2 shiftwidth=2 shiftwidth<CR>
+nnoremap <silent> yo4 :setlocal tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth<CR>
+nnoremap <silent> yo8 :setlocal tabstop=8 softtabstop=8 shiftwidth=8 shiftwidth<CR>
 
-nnoremap <silent> =o@ :setlocal tabstop=2<CR>:setlocal tabstop?<CR>
-nnoremap <silent> =o$ :setlocal tabstop=4<CR>:setlocal tabstop?<CR>
-nnoremap <silent> =o* :setlocal tabstop=8<CR>:setlocal tabstop?<CR>
+nnoremap <silent> yo@ :setlocal tabstop=2<CR>:setlocal tabstop?<CR>
+nnoremap <silent> yo$ :setlocal tabstop=4<CR>:setlocal tabstop?<CR>
+nnoremap <silent> yo* :setlocal tabstop=8<CR>:setlocal tabstop?<CR>
 " }
 
 " Exchange gj and gk to j and k {
@@ -45,7 +45,7 @@ function! s:ToggleGJK() abort
     endif
 endfunction
 
-nnoremap <silent> =om :call <SID>ToggleGJK()<CR>
+nnoremap <silent> yom :call <SID>ToggleGJK()<CR>
 " }
 
 " Toggle mouse {
@@ -60,7 +60,7 @@ if has('mouse')
         endif
     endfunction
 
-    nnoremap <silent> =oM :call <SID>ToggleMouse()<CR>
+    nnoremap <silent> yoM :call <SID>ToggleMouse()<CR>
 endif
 " }
 
@@ -82,7 +82,7 @@ if has('clipboard')
         endif
     endfunction
 
-    nnoremap <silent> =oy :call <SID>ToggleClipboard()<CR>
+    nnoremap <silent> yoy :call <SID>ToggleClipboard()<CR>
 endif
 " }
 
@@ -98,7 +98,7 @@ function! s:CycleTabline() abort
     set showtabline?
 endfunction
 
-nnoremap <silent> =ot :call <SID>CycleTabline()<CR>
+nnoremap <silent> yot :call <SID>CycleTabline()<CR>
 " }
 
 " Cycle statusline {
@@ -113,7 +113,7 @@ function! s:CycleStatusline() abort
     set  laststatus?
 endfunction
 
-nnoremap <silent> =oT :call <SID>CycleStatusline()<CR>
+nnoremap <silent> yoT :call <SID>CycleStatusline()<CR>
 " }
 
 " Cycle  conceallevel {
@@ -129,7 +129,7 @@ if has('conceal')
         set conceallevel?
     endfunction
 
-    nnoremap <silent> =ok :call <SID>CycleConceallevel()<CR>
+    nnoremap <silent> yok :call <SID>CycleConceallevel()<CR>
 endif
 " }
 
@@ -146,7 +146,7 @@ endfunction
 " }
 
 " Toggle expandtab
-nnoremap <silent> =oe :call <SID>ToggleLocalOption('expandtab')<CR>
+nnoremap <silent> yoe :call <SID>ToggleLocalOption('expandtab')<CR>
 
 " Toggle EOL {
 function! s:ToggleEOL() abort
@@ -158,14 +158,14 @@ function! s:ToggleEOL() abort
     setlocal listchars?
 endfunction
 
-nnoremap <silent> =oE :call <SID>ToggleEOL()<CR>
+nnoremap <silent> yoE :call <SID>ToggleEOL()<CR>
 " }
 
 " Toggle "keep current line in the center of the screen" mode
-nnoremap <silent> =oz :let &scrolloff = 999 - &scrolloff<CR>:set scrolloff?<CR>
+nnoremap <silent> yoz :let &scrolloff = 999 - &scrolloff<CR>:set scrolloff?<CR>
 
 " Toggle showcmd
-nnoremap <silent> =o; :call <SID>ToggleOption('showcmd')<CR>
+nnoremap <silent> yo; :call <SID>ToggleOption('showcmd')<CR>
 
 " Improve toggling foldenable
 nnoremap zi zi:set foldenable?<CR>
@@ -188,7 +188,7 @@ function! s:CycleFoldMethod() abort
     set foldmethod?
 endfunction
 
-nnoremap <silent> =oo :call <SID>CycleFoldMethod()<CR>
+nnoremap <silent> yoo :call <SID>CycleFoldMethod()<CR>
 " }
 
 let g:loaded_toggler = 1
