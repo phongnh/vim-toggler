@@ -1,5 +1,5 @@
-if get(g:, 'loaded_toggler', 0)
-    finish
+if get(g:, 'loaded_vim_toggler', 0)
+    " finish
 endif
 
 " Change tab width {
@@ -77,7 +77,7 @@ if has('clipboard')
             execute printf('set clipboard-=%s', s:clipboard)
             echo printf('Disabled "%s" clipboard!', s:clipboard)
         else
-            execute printf('set clipboard+=%s', s:clipboard)
+            execute printf('set clipboard^=%s', s:clipboard)
             echo printf('Enabled "%s" clipboard!', s:clipboard)
         endif
     endfunction
@@ -191,4 +191,4 @@ endfunction
 nnoremap <silent> yoo :call <SID>CycleFoldMethod()<CR>
 " }
 
-let g:loaded_toggler = 1
+let g:loaded_vim_toggler = 1
