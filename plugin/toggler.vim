@@ -129,7 +129,7 @@ if has('conceal')
         set conceallevel?
     endfunction
 
-    nnoremap <silent> yok :call <SID>CycleConceallevel()<CR>
+    nnoremap <silent> yoC :call <SID>CycleConceallevel()<CR>
 endif
 " }
 
