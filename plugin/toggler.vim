@@ -1,5 +1,5 @@
 if get(g:, 'loaded_vim_toggler', 0)
-    " finish
+    finish
 endif
 
 " Change tab width {
