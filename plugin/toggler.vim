@@ -145,6 +145,10 @@ function! s:ToggleLocalOption(option_name) abort
 endfunction
 " }
 
+" Toggle incsearch
+nnoremap <silent> yoI :call <SID>ToggleLocalOption('incsearch')<CR>
+nnoremap <silent> yoS :call <SID>ToggleOption('incsearch')<CR>
+
 " Toggle expandtab
 nnoremap <silent> yoe :call <SID>ToggleLocalOption('expandtab')<CR>
 
