@@ -10,6 +10,7 @@ Toggle useful options:
 * tabline (showtabline) (yot)
 * statusline (laststatus) (yoT)
 * conceallevel (yok)
+* incsearch (yoI / yoS)
 * expandtab (yoe)
 * eol of listchars (yoE)
 * scrolloff (yoz)
