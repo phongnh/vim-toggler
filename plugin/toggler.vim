@@ -12,6 +12,27 @@ nnoremap <silent> yo$ :setlocal tabstop=4<CR>:setlocal tabstop?<CR>
 nnoremap <silent> yo* :setlocal tabstop=8<CR>:setlocal tabstop?<CR>
 " }
 
+" Enable/disable gt/gT to cycle buffers when VIM has only one tabpage {
+function! s:CycleBuffersWithTabMappings() abort
+    if empty(mapcheck('gt', 'n')) || empty(mapcheck('gT', 'n'))
+        nnoremap <silent> <expr> gt tabpagenr('$') == 1 ? ":\<C-U>bnext\<CR>" : ":\<C-U>tabnext\<CR>"
+        nnoremap <silent> <expr> gT tabpagenr('$') == 1 ? ":\<C-U>bprevious\<CR>" : ":\<C-U>tabprevious\<CR>"
+        echo 'Enabled cycling buffers with gt/gT for VIM with only one tabpage!'
+    else
+        silent! nunmap gt
+        silent! nunmap gT
+        echo 'Disabled cycling buffers with gt/gT for VIM with only one tabpage!'
+    endif
+endfunction
+
+if get(g:, 'vim_toggler_enable_cycling_buffers_with_gt_gT', 0)
+    silent! call <SID>CycleBuffersWithTabMappings()
+endif
+
+nnoremap <silent> yoB :call <SID>CycleBuffersWithTabMappings()<CR>
+nnoremap <silent> yoG :call <SID>CycleBuffersWithTabMappings()<CR>
+" }
+
 " Exchange gj and gk to j and k {
 function! s:ToggleGJK() abort
     if get(s:, 'enabled_gjk', 0)
