@@ -7,9 +7,9 @@ nnoremap <silent> yo2 :setlocal tabstop=2 softtabstop=2 shiftwidth=2 shiftwidth<
 nnoremap <silent> yo4 :setlocal tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth<CR>
 nnoremap <silent> yo8 :setlocal tabstop=8 softtabstop=8 shiftwidth=8 shiftwidth<CR>
 
-nnoremap <silent> yo@ :setlocal tabstop=2<CR>:setlocal tabstop?<CR>
-nnoremap <silent> yo$ :setlocal tabstop=4<CR>:setlocal tabstop?<CR>
-nnoremap <silent> yo* :setlocal tabstop=8<CR>:setlocal tabstop?<CR>
+nnoremap <silent> yo@ :setlocal tabstop=2 tabstop<CR>
+nnoremap <silent> yo$ :setlocal tabstop=4 tabstop<CR>
+nnoremap <silent> yo* :setlocal tabstop=8 tabstop<CR>
 " }
 
 " Enable/disable gt/gT to cycle buffers when VIM has only one tabpage {
@@ -107,52 +107,44 @@ if has('clipboard')
 endif
 " }
 
-" Cycle Tabline {
-function! s:CycleTabline() abort
-    if &showtabline == 0
-        set showtabline=1
-    elseif &showtabline == 1
-        set showtabline=2
-    else
+" Toggle showtabline {
+function! s:ToggleShowtabline() abort
+    if &showtabline > 0
         set showtabline=0
+    else
+        set showtabline=2
     endif
     set showtabline?
 endfunction
 
-nnoremap <silent> yot :call <SID>CycleTabline()<CR>
+nnoremap <silent> yot :call <SID>ToggleShowtabline()<CR>
 " }
 
-" Cycle statusline {
-function! s:CycleStatusline() abort
-    if &laststatus == 0
-        set laststatus=1
-    elseif &laststatus == 1
-        set laststatus=2
-    else
+" Toggle statusline {
+function! s:ToggleStatusline() abort
+    if &laststatus > 0
         set laststatus=0
+    else
+        set laststatus=2
     endif
-    set  laststatus?
+    set laststatus?
 endfunction
 
-nnoremap <silent> yoT :call <SID>CycleStatusline()<CR>
+nnoremap <silent> yoT :call <SID>ToggleStatusline()<CR>
 " }
 
-" Cycle  conceallevel {
+" Toggle conceallevel {
 if has('conceal')
-    function! s:CycleConceallevel()
-        if &conceallevel == 0
-            set conceallevel=1
-        elseif &conceallevel == 1
-            set conceallevel=2
-        elseif &conceallevel == 2
-            set conceallevel=3
-        else
+    function! s:ToggleConceallevel()
+        if &conceallevel > 0
             set conceallevel=0
+        else
+            set conceallevel=2
         endif
         set conceallevel?
     endfunction
 
-    nnoremap <silent> yoC :call <SID>CycleConceallevel()<CR>
+    nnoremap <silent> yoC :call <SID>ToggleConceallevel()<CR>
 endif
 " }
 
