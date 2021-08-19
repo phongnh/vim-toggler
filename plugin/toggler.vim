@@ -69,22 +69,6 @@ endfunction
 nnoremap <silent> yom :call <SID>ToggleGJK()<CR>
 " }
 
-" Toggle mouse {
-if has('mouse')
-    function! s:ToggleMouse()
-        if &mouse == ''
-            set mouse=a
-            echo 'Mouse is for Vim (' . &mouse . ')'
-        else
-            set mouse=
-            echo 'Mouse is for terminal'
-        endif
-    endfunction
-
-    nnoremap <silent> yoM :call <SID>ToggleMouse()<CR>
-endif
-" }
-
 " Toggle clipboard {
 if has('clipboard')
     if has('unnamedplus')
@@ -159,6 +143,9 @@ function! s:ToggleLocalOption(option_name) abort
     execute printf('setlocal %s! %s?', a:option_name, a:option_name)
 endfunction
 " }
+
+" Toggle showmatch
+nnoremap <silent> yoM :call <SID>ToggleOption('showmatch')<CR>
 
 " Toggle incsearch
 nnoremap <silent> yoI :call <SID>ToggleLocalOption('incsearch')<CR>
