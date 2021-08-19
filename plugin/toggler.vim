@@ -99,6 +99,8 @@ function! s:ToggleShowtabline() abort
         else
             set showtabline=0
         endif
+    elseif tabpagenr('$') > 1
+        set showtabline=1
     else
         set showtabline=2
     endif
@@ -116,6 +118,8 @@ function! s:ToggleStatusline() abort
         else
             set laststatus=0
         endif
+    elseif winnr('$') > 1
+        set laststatus=1
     else
         set laststatus=2
     endif
