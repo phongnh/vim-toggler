@@ -94,7 +94,11 @@ endif
 " Toggle showtabline {
 function! s:ToggleShowtabline() abort
     if &showtabline > 0
-        set showtabline=0
+        if &showtabline == 1 && tabpagenr('$') == 1
+            set showtabline=2
+        else
+            set showtabline=0
+        endif
     else
         set showtabline=2
     endif
@@ -107,7 +111,11 @@ nnoremap <silent> yot :call <SID>ToggleShowtabline()<CR>
 " Toggle statusline {
 function! s:ToggleStatusline() abort
     if &laststatus > 0
-        set laststatus=0
+        if &laststatus == 1 && winnr('$') == 1
+            set laststatus=2
+        else
+            set laststatus=0
+        endif
     else
         set laststatus=2
     endif
