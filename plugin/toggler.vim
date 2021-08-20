@@ -167,11 +167,33 @@ nnoremap <silent> yoS :call <SID>ToggleOption('incsearch')<CR>
 nnoremap <silent> yoe :call <SID>ToggleLocalOption('expandtab')<CR>
 
 " Toggle EOL {
+function! s:UnifyListchars() abort
+    let l:listchar_mappings = {}
+    for l:item in split(&listchars, ',')
+        let [l:part, l:char] = split(l:item, ':')
+        let l:listchar_mappings[l:part] = escape(l:char, ' ')
+    endfor
+    let l:listchars = []
+    for l:part in sort(keys(l:listchar_mappings))
+        let l:char = l:listchar_mappings[l:part]
+        call add(l:listchars, join([l:part, escape(l:char, ' ')], ':'))
+    endfor
+    execute printf('set listchars=%s', join(l:listchars, ','))
+endfunction
+
 function! s:ToggleEOL() abort
-    if match(&listchars, 'eol:¬') > -1
-        setlocal listchars-=eol:¬
+    if !exists('s:eol_char')
+        call s:UnifyListchars()
+    endif
+    let l:listchars = split(&listchars, ',')
+    let l:idx = match(l:listchars, 'eol')
+    if !exists('s:eol_char')
+        let s:eol_char = l:idx > -1 ? split(l:listchars[l:idx], ':')[-1] : '$'
+    endif
+    if l:idx > -1
+        execute printf('setlocal listchars-=eol:%s', s:eol_char)
     else
-        setlocal listchars+=eol:¬
+        execute printf('setlocal listchars+=eol:%s', s:eol_char)
     endif
     setlocal listchars?
 endfunction
