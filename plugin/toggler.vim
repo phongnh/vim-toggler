@@ -228,7 +228,7 @@ function! s:CycleFoldMethod() abort
     set foldmethod?
 endfunction
 
-nnoremap <silent> yoo :call <SID>CycleFoldMethod()<CR>
+nnoremap <silent> yof :call <SID>CycleFoldMethod()<CR>
 " }
 
 let g:loaded_vim_toggler = 1
