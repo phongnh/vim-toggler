@@ -176,9 +176,9 @@ function! s:UnifyListchars() abort
     let l:listchars = []
     for l:part in sort(keys(l:listchar_mappings))
         let l:char = l:listchar_mappings[l:part]
-        call add(l:listchars, join([l:part, escape(l:char, ' ')], ':'))
+        call add(l:listchars, join([l:part, l:char], ':'))
     endfor
-    execute printf('set listchars=%s', join(l:listchars, ','))
+    execute printf('set listchars=%s', escape(join(l:listchars, ','), ' '))
 endfunction
 
 function! s:ToggleEOL() abort
