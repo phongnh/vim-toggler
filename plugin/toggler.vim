@@ -15,8 +15,8 @@ nnoremap <silent> yo* :setlocal tabstop=8 tabstop<CR>
 " Enable/disable gt/gT to cycle buffers when VIM has only one tabpage {
 function! s:CycleBuffersWithTabMappings() abort
     if empty(mapcheck('gt', 'n')) || empty(mapcheck('gT', 'n'))
-        nnoremap <silent> <expr> gt tabpagenr('$') == 1 ? ":\<C-U>bnext\<CR>" : ":\<C-U>tabnext\<CR>"
-        nnoremap <silent> <expr> gT tabpagenr('$') == 1 ? ":\<C-U>bprevious\<CR>" : ":\<C-U>tabprevious\<CR>"
+        nnoremap <silent> <expr> gt printf(":\<C-u>%s%s\<CR>", v:count > 0 ? v:count : '', tabpagenr('$') == 1 ? 'bnext' : 'tabnext')
+        nnoremap <silent> <expr> gT printf(":\<C-u>%s%s\<CR>", v:count > 0 ? v:count : '', tabpagenr('$') == 1 ? 'bprevious' : 'tabprevious')
         echo 'Enabled cycling buffers with gt/gT for VIM with only one tabpage!'
     else
         silent! nunmap gt
