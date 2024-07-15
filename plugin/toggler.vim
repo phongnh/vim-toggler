@@ -77,7 +77,7 @@ if has('clipboard')
         let s:clipboard = 'unnamed'
     endif
 
-    function! s:ToggleClipboard()
+    function! s:ToggleClipboard() abort
         if match(&clipboard, s:clipboard) > -1
             execute printf('set clipboard-=%s', s:clipboard)
             echo printf('Disabled "%s" clipboard!', s:clipboard)
@@ -131,7 +131,7 @@ nnoremap <silent> yoT :call <SID>ToggleStatusline()<CR>
 
 " Toggle conceallevel {
 if has('conceal')
-    function! s:ToggleConceallevel()
+    function! s:ToggleConceallevel() abort
         if &conceallevel > 0
             set conceallevel=0
         else
