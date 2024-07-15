@@ -3,13 +3,13 @@ if get(g:, 'loaded_vim_toggler', 0)
 endif
 
 " Change tab width {
-nnoremap <silent> yo2 :setlocal tabstop=2 softtabstop=2 shiftwidth=2 shiftwidth<CR>
-nnoremap <silent> yo4 :setlocal tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth<CR>
-nnoremap <silent> yo8 :setlocal tabstop=8 softtabstop=8 shiftwidth=8 shiftwidth<CR>
+nnoremap <silent> yo2 :<C-u>setlocal tabstop=2 softtabstop=2 shiftwidth=2 shiftwidth<CR>
+nnoremap <silent> yo4 :<C-u>setlocal tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth<CR>
+nnoremap <silent> yo8 :<C-u>setlocal tabstop=8 softtabstop=8 shiftwidth=8 shiftwidth<CR>
 
-nnoremap <silent> yo@ :setlocal tabstop=2 tabstop<CR>
-nnoremap <silent> yo$ :setlocal tabstop=4 tabstop<CR>
-nnoremap <silent> yo* :setlocal tabstop=8 tabstop<CR>
+nnoremap <silent> yo@ ::<C-u>etlocal tabstop=2 tabstop<CR>
+nnoremap <silent> yo$ ::<C-u>etlocal tabstop=4 tabstop<CR>
+nnoremap <silent> yo* ::<C-u>etlocal tabstop=8 tabstop<CR>
 " }
 
 " Enable/disable gt/gT to cycle buffers when VIM has only one tabpage {
@@ -29,8 +29,8 @@ if get(g:, 'vim_toggler_enable_cycling_buffers_with_gt_gT', 0)
     silent! call <SID>CycleBuffersWithTabMappings()
 endif
 
-nnoremap <silent> yoB :call <SID>CycleBuffersWithTabMappings()<CR>
-nnoremap <silent> yoG :call <SID>CycleBuffersWithTabMappings()<CR>
+nnoremap <silent> yoB :<C-u>call <SID>CycleBuffersWithTabMappings()<CR>
+nnoremap <silent> yoG :<C-u>call <SID>CycleBuffersWithTabMappings()<CR>
 " }
 
 " Exchange gj and gk to j and k {
@@ -66,7 +66,7 @@ function! s:ToggleGJK() abort
     endif
 endfunction
 
-nnoremap <silent> yom :call <SID>ToggleGJK()<CR>
+nnoremap <silent> yom :<C-u>call <SID>ToggleGJK()<CR>
 " }
 
 " Toggle clipboard {
@@ -87,7 +87,7 @@ if has('clipboard')
         endif
     endfunction
 
-    nnoremap <silent> yoy :call <SID>ToggleClipboard()<CR>
+    nnoremap <silent> yoy :<C-u>call <SID>ToggleClipboard()<CR>
 endif
 " }
 
@@ -107,7 +107,7 @@ function! s:ToggleShowtabline() abort
     set showtabline?
 endfunction
 
-nnoremap <silent> yot :call <SID>ToggleShowtabline()<CR>
+nnoremap <silent> yot :<C-u>call <SID>ToggleShowtabline()<CR>
 " }
 
 " Toggle statusline {
@@ -126,7 +126,7 @@ function! s:ToggleStatusline() abort
     set laststatus?
 endfunction
 
-nnoremap <silent> yoT :call <SID>ToggleStatusline()<CR>
+nnoremap <silent> yoT :<C-u>call <SID>ToggleStatusline()<CR>
 " }
 
 " Toggle conceallevel {
@@ -140,31 +140,19 @@ if has('conceal')
         set conceallevel?
     endfunction
 
-    nnoremap <silent> yoC :call <SID>ToggleConceallevel()<CR>
+    nnoremap <silent> yoC :<C-u>call <SID>ToggleConceallevel()<CR>
 endif
 " }
 
-" Toggle option {
-function! s:ToggleOption(option_name) abort
-    execute printf('set %s! %s?', a:option_name, a:option_name)
-endfunction
-" }
-
-" Toggle local option {
-function! s:ToggleLocalOption(option_name) abort
-    execute printf('setlocal %s! %s?', a:option_name, a:option_name)
-endfunction
-" }
-
 " Toggle showmatch
-nnoremap <silent> yoM :call <SID>ToggleOption('showmatch')<CR>
+nnoremap <silent> yoM :<C-u>set showmatch! showmatch?<CR>
 
 " Toggle incsearch
-nnoremap <silent> yoI :call <SID>ToggleLocalOption('incsearch')<CR>
-nnoremap <silent> yoS :call <SID>ToggleOption('incsearch')<CR>
+nnoremap <silent> yoI :<C-u>setlocal incsearch! incsearch?<CR>
+nnoremap <silent> yoS :<C-u>set incsearch! incsearch?<CR>
 
 " Toggle expandtab
-nnoremap <silent> yoe :call <SID>ToggleLocalOption('expandtab')<CR>
+nnoremap <silent> yoe :<C-u>setlocal expandtab! expandtab?<CR>
 
 " Toggle EOL {
 function! s:UnifyListchars() abort
@@ -198,17 +186,14 @@ function! s:ToggleEOL() abort
     setlocal listchars?
 endfunction
 
-nnoremap <silent> yoE :call <SID>ToggleEOL()<CR>
+nnoremap <silent> yoE :<C-u>call <SID>ToggleEOL()<CR>
 " }
 
 " Toggle "keep current line in the center of the screen" mode
-nnoremap <silent> yoz :let &scrolloff = 999 - &scrolloff<CR>:set scrolloff?<CR>
+nnoremap <silent> yoz :<C-u>let &scrolloff = 999 - &scrolloff<CR>:set scrolloff?<CR>
 
 " Toggle showcmd
-nnoremap <silent> yo; :call <SID>ToggleOption('showcmd')<CR>
-
-" Improve toggling foldenable
-nnoremap <silent> zi zi:<C-u>setlocal foldenable?<CR>
+nnoremap <silent> yo; :<C-u>set showcmd! showcmd?<CR>
 
 " Cycle Fold Method {
 function! s:CycleFoldMethod() abort
@@ -228,7 +213,16 @@ function! s:CycleFoldMethod() abort
     set foldmethod?
 endfunction
 
-nnoremap <silent> yof :call <SID>CycleFoldMethod()<CR>
+nnoremap <silent> yof :<C-u>call <SID>CycleFoldMethod()<CR>
 " }
+
+" Improve folding mappings
+nnoremap <silent> zr zr:<C-u>setlocal foldlevel?<CR>
+nnoremap <silent> zm zm:<C-u>setlocal foldlevel?<CR>
+nnoremap <silent> zR zR:<C-u>setlocal foldlevel?<CR>
+nnoremap <silent> zM zM:<C-u>setlocal foldlevel?<CR>
+nnoremap <silent> zi zi:<C-u>setlocal foldenable?<CR>
+nnoremap <silent> z] :<C-u>let &foldcolumn = &foldcolumn + 1<CR>:<C-u>setlocal foldcolumn?<CR>
+nnoremap <silent> z[ :<C-u>let &foldcolumn = &foldcolumn - 1<CR>:<C-u>setlocal foldcolumn?<CR>
 
 let g:loaded_vim_toggler = 1
