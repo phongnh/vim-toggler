@@ -208,7 +208,7 @@ nnoremap <silent> yoz :let &scrolloff = 999 - &scrolloff<CR>:set scrolloff?<CR>
 nnoremap <silent> yo; :call <SID>ToggleOption('showcmd')<CR>
 
 " Improve toggling foldenable
-nnoremap zi zi:set foldenable?<CR>
+nnoremap <silent> zi zi:<C-u>setlocal foldenable?<CR>
 
 " Cycle Fold Method {
 function! s:CycleFoldMethod() abort
