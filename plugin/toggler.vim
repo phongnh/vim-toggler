@@ -63,19 +63,14 @@ nnoremap <silent> yom :<C-u>call <SID>ToggleGJK()<CR>
 
 " Toggle clipboard {
 if has('clipboard')
-    if has('unnamedplus')
-        let s:clipboard = 'unnamedplus'
-    else
-        let s:clipboard = 'unnamed'
-    endif
-
     function! s:ToggleClipboard() abort
-        if match(&clipboard, s:clipboard) > -1
-            execute printf('set clipboard-=%s', s:clipboard)
-            echo printf('Disabled "%s" clipboard!', s:clipboard)
+        let l:clipboard = has('unnamedplus') ? 'unnamedplus' : 'unnamed'
+        if match(&clipboard, l:clipboard) > -1
+            execute printf('set clipboard-=%s', l:clipboard)
+            echo printf('Disabled "%s" clipboard!', l:clipboard)
         else
-            execute printf('set clipboard^=%s', s:clipboard)
-            echo printf('Enabled "%s" clipboard!', s:clipboard)
+            execute printf('set clipboard^=%s', l:clipboard)
+            echo printf('Enabled "%s" clipboard!', l:clipboard)
         endif
     endfunction
 
