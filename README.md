@@ -2,13 +2,11 @@
 
 Toggle useful options:
 
-* set tabstop, softtabstop and shiftwidth (`yo2` -> 2, `yo4` -> 4, and `yo8` -> 8)
-* set tabstop (`yo@` -> 2, `yo$` -> 4, and `yo*` -> 8)
+* set softtabstop and shiftwidth (`yo2` -> 2, `yo4` -> 4, and `yo8` -> 8)
+* set tabstop, softtabstop and shiftwidth (`yo@` -> 2, `yo$` -> 4, and `yo*` -> 8)
 * enable/disable gt/gT to cycle buffers when VIM has only one tabpage (`yoB`, `yoG`)
 * exchange gj and j, gk and k (`yom`)
 * "unnamed" or "unnamedplus" clipboard (`yoy`)
-* tabline (showtabline) (`yot`)
-* statusline (laststatus) (`yoT`)
 * conceallevel (`yoC`)
 * showmatch (`yoM`)
 * incsearch (`yoI` / `yoS`)
