@@ -35,7 +35,7 @@ nnoremap <silent> yoG :<C-u>call <SID>CycleBuffersWithTabMappings()<CR>
 
 " Exchange gj and gk to j and k {
 function! s:ToggleGJK() abort
-    if empty(mapcheck('j', n)) || empty(mapcheck('k', n))
+    if empty(mapcheck('j', 'n')) || empty(mapcheck('k', 'n'))
         nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
         xnoremap <expr> j v:count == 0 ? 'gj' : 'j'
         nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
